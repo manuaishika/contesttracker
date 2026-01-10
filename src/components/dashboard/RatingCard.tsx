@@ -1,3 +1,5 @@
+import { CodeforcesIcon, LeetCodeIcon } from '@/components/icons/PlatformIcons'
+
 interface RatingCardProps {
   platform: string
   rating: number
@@ -5,13 +7,15 @@ interface RatingCardProps {
   rank?: string
 }
 
-const platformIcons: Record<string, string> = {
-  Codeforces: '🔵',
-  LeetCode: '🟡',
-  AtCoder: '🟣',
-  CodeChef: '🟠',
-  HackerRank: '🟢',
-  TopCoder: '💎',
+const getPlatformIcon = (platform: string) => {
+  switch (platform) {
+    case 'Codeforces':
+      return <CodeforcesIcon className="w-6 h-6" />
+    case 'LeetCode':
+      return <LeetCodeIcon className="w-6 h-6" />
+    default:
+      return <div className="w-6 h-6 rounded-full bg-gray-600" />
+  }
 }
 
 export function RatingCard({ platform, rating, change, rank }: RatingCardProps) {
@@ -19,7 +23,7 @@ export function RatingCard({ platform, rating, change, rank }: RatingCardProps) 
     <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 transition-all">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <span className="text-2xl">{platformIcons[platform] || '📅'}</span>
+          {getPlatformIcon(platform)}
           <h3 className="text-lg font-mono font-semibold text-white">{platform}</h3>
         </div>
         <button className="text-gray-500 hover:text-primary transition-colors text-sm font-mono">

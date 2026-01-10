@@ -1,19 +1,30 @@
 import { Link } from 'react-router-dom'
-import { mockContests } from '@/lib/mockData'
-
-const platformIcons: Record<string, string> = {
-  Codeforces: '🔵',
-  LeetCode: '🟡',
-  AtCoder: '🟣',
-  CodeChef: '🟠',
-  HackerRank: '🟢',
-  TopCoder: '💎',
-}
+import { useEffect, useState } from 'react'
+import { fetchAllContests } from '@/lib/api/contests'
+import { Contest } from '@/lib/types'
+import { CodeforcesIcon, LeetCodeIcon, ExternalLinkIcon, ClockIcon } from '@/components/icons/PlatformIcons'
 
 export function UpcomingContestsPreview() {
-  const upcoming = mockContests
-    .filter((c) => c.status === 'upcoming')
-    .slice(0, 4)
+  const [upcoming, setUpcoming] = useState<Contest[]>([])
+
+  useEffect(() => {
+    async function loadContests() {
+      const contests = await fetchAllContests()
+      setUpcoming(contests.filter((c) => c.status === 'upcoming').slice(0, 4))
+    }
+    loadContests()
+  }, [])
+
+  const getPlatformIcon = (platform: string) => {
+    switch (platform) {
+      case 'Codeforces':
+        return <CodeforcesIcon className="w-6 h-6" />
+      case 'LeetCode':
+        return <LeetCodeIcon className="w-6 h-6" />
+      default:
+        return <div className="w-6 h-6 rounded-full bg-gray-600" />
+    }
+  }
 
   const formatTimeUntil = (startTime: string) => {
     const now = new Date()
@@ -53,7 +64,7 @@ export function UpcomingContestsPreview() {
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="text-2xl">{platformIcons[contest.platform] || '📅'}</div>
+                  {getPlatformIcon(contest.platform)}
                   <div>
                     <p className="text-gray-400 font-mono text-sm">{contest.platform}</p>
                     <h3 className="text-white font-mono font-semibold mt-1 group-hover:text-primary transition-colors">
@@ -61,13 +72,18 @@ export function UpcomingContestsPreview() {
                     </h3>
                   </div>
                 </div>
-                <button className="text-gray-600 hover:text-primary transition-colors">
-                  ↗
-                </button>
+                <a
+                  href={contest.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-primary transition-colors"
+                >
+                  <ExternalLinkIcon />
+                </a>
               </div>
               <div className="flex items-center justify-between text-sm font-mono">
                 <div className="flex items-center gap-2 text-gray-400">
-                  <span>🕐</span>
+                  <ClockIcon className="w-4 h-4" />
                   <span>{new Date(contest.startTime).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
                 <div className="flex items-center gap-4">

@@ -5,6 +5,8 @@ interface StatsOverviewProps {
   bestRank?: number
 }
 
+import { ChartIcon, TrophyIcon } from '@/components/icons/PlatformIcons'
+
 export function StatsOverview({
   totalContests = 0,
   contestsParticipated = 0,
@@ -12,10 +14,26 @@ export function StatsOverview({
   bestRank = 0,
 }: StatsOverviewProps) {
   const stats = [
-    { label: 'Total Contests', value: totalContests, icon: '📅' },
-    { label: 'Participated', value: contestsParticipated, icon: '✅' },
-    { label: 'Average Rank', value: averageRank || 'N/A', icon: '📊' },
-    { label: 'Best Rank', value: bestRank || 'N/A', icon: '🏆' },
+    { 
+      label: 'Total Contests', 
+      value: totalContests, 
+      icon: <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/30"><span className="text-blue-400 font-mono font-bold text-sm">TC</span></div>
+    },
+    { 
+      label: 'Participated', 
+      value: contestsParticipated, 
+      icon: <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30"><span className="text-green-400 font-mono font-bold text-sm">✓</span></div>
+    },
+    { 
+      label: 'Average Rank', 
+      value: averageRank || 'N/A', 
+      icon: <ChartIcon className="w-6 h-6 text-primary" />
+    },
+    { 
+      label: 'Best Rank', 
+      value: bestRank || 'N/A', 
+      icon: <TrophyIcon className="w-6 h-6 text-primary" />
+    },
   ]
 
   return (
@@ -26,7 +44,7 @@ export function StatsOverview({
           className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 transition-all"
         >
           <div className="flex items-center gap-3 mb-2">
-            <span className="text-2xl">{stat.icon}</span>
+            {stat.icon}
             <h4 className="text-sm font-mono text-gray-400">{stat.label}</h4>
           </div>
           <div className="text-3xl font-bold font-mono text-primary">{stat.value}</div>

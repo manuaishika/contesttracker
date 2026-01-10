@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { TrophyIcon, ChartIcon, BellIcon } from '@/components/icons/PlatformIcons'
 
 export function HeroSection() {
   return (
@@ -32,7 +33,7 @@ export function HeroSection() {
               to="/contests"
               className="px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-all font-mono font-semibold border-glow-green flex items-center gap-2"
             >
-              <span>🏆</span>
+              <TrophyIcon className="w-5 h-5" />
               View Contests →
             </Link>
             <Link
@@ -46,21 +47,27 @@ export function HeroSection() {
           {/* Feature highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">📅</span>
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+                <span className="text-primary font-mono font-bold">6+</span>
+              </div>
               <div>
                 <h3 className="text-primary font-mono font-semibold mb-1">6+ Platforms</h3>
                 <p className="text-gray-400 text-sm font-mono">All major CP platforms in one place</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <span className="text-2xl">📊</span>
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+                <ChartIcon className="w-5 h-5 text-primary" />
+              </div>
               <div>
                 <h3 className="text-primary font-mono font-semibold mb-1">Track Ratings</h3>
                 <p className="text-gray-400 text-sm font-mono">Monitor your progress across platforms</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <span className="text-2xl">🔔</span>
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+                <BellIcon className="w-5 h-5 text-primary" />
+              </div>
               <div>
                 <h3 className="text-primary font-mono font-semibold mb-1">Never Miss</h3>
                 <p className="text-gray-400 text-sm font-mono">Set reminders for upcoming contests</p>
