@@ -4,6 +4,7 @@ import { ProtectedRoute } from '@/components/ProtectedRoute'
 import { Index } from '@/pages/Index'
 import { Contests } from '@/pages/Contests'
 import { Dashboard } from '@/pages/Dashboard'
+import { Admin } from '@/pages/Admin'
 import { Login } from '@/pages/Login'
 import { Signup } from '@/pages/Signup'
 import { NotFound } from '@/pages/NotFound'
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Index />} />
           <Route path="contests" element={<Contests />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="*" element={<NotFound />} />

@@ -11,7 +11,7 @@ export function Index() {
       <UpcomingContestsPreview />
       <footer className="text-center py-12 text-gray-500 font-mono text-sm">
         <p className="mb-2">$ Built for competitive programmers, by competitive programmers</p>
-        <p>© 2024 CP Hub. Track. Compete. Improve.</p>
+        <p>© 2026 CP Hub. Track. Compete. Improve.</p>
       </footer>
     </div>
   )

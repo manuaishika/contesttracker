@@ -20,7 +20,7 @@ const getPlatformIcon = (platform: string) => {
 
 export function RatingCard({ platform, rating, change, rank }: RatingCardProps) {
   return (
-    <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 transition-all">
+    <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,136,0.1)] transition-all duration-300 cursor-pointer">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           {getPlatformIcon(platform)}

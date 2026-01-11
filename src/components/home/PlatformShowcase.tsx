@@ -30,7 +30,7 @@ export function PlatformShowcase() {
                   href={platform.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 transition-all cursor-pointer group"
+                  className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,136,0.1)] transition-all duration-300 cursor-pointer group"
                 >
                   <div className={`w-12 h-12 ${platform.color} rounded-full mx-auto mb-4 flex items-center justify-center`}>
                     {IconComponent ? (

@@ -1,12 +1,32 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/contexts/AuthContext'
+import { supabase } from '@/lib/supabase'
 import { TrophyIcon, ChartIcon } from '@/components/icons/PlatformIcons'
 
 export function Navbar() {
   const location = useLocation()
   const navigate = useNavigate()
   const { user, signOut } = useAuth()
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    async function checkAdmin() {
+      if (user?.id) {
+        const { data } = await supabase
+          .from('profiles')
+          .select('is_admin')
+          .eq('id', user.id)
+          .single()
+        
+        setIsAdmin(data?.is_admin || false)
+      } else {
+        setIsAdmin(false)
+      }
+    }
+    checkAdmin()
+  }, [user?.id])
 
   const handleSignOut = async () => {
     await signOut()
@@ -48,6 +68,20 @@ export function Navbar() {
               <ChartIcon className="w-4 h-4" />
               Dashboard
             </Link>
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className={cn(
+                  "flex items-center gap-2 px-3 py-2 rounded-md transition-colors font-mono text-sm",
+                  location.pathname === '/admin'
+                    ? "text-primary bg-primary/10 border-glow-green"
+                    : "text-gray-400 hover:text-white"
+                )}
+                style={{ pointerEvents: 'auto', zIndex: 10007, position: 'relative', cursor: 'pointer' }}
+              >
+                Admin
+              </Link>
+            )}
             {user ? (
               <>
                 <span className="text-gray-400 font-mono text-sm" style={{ pointerEvents: 'auto' }}>

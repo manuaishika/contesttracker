@@ -99,21 +99,21 @@ export function Contests() {
         </div>
       </div>
 
-      {/* Platform Filters */}
-      <div className="flex flex-wrap gap-3 mb-6">
-        {platforms.map((platform) => {
-          const IconComponent = 'component' in platform ? platform.component : null
-          return (
-            <button
-              key={platform.name}
-              onClick={() => setSelectedPlatform(selectedPlatform === platform.name ? null : platform.name)}
-              className={`w-12 h-12 rounded-full ${platform.color} flex items-center justify-center transition-all ${
-                selectedPlatform === platform.name
-                  ? 'ring-2 ring-primary ring-offset-2 ring-offset-[#0a0a0a] scale-110'
-                  : 'opacity-70 hover:opacity-100'
-              }`}
-              title={platform.name}
-            >
+        {/* Platform Filters */}
+        <div className="flex flex-wrap gap-3 mb-6">
+          {platforms.map((platform) => {
+            const IconComponent = 'component' in platform ? platform.component : null
+            return (
+              <button
+                key={platform.name}
+                onClick={() => setSelectedPlatform(selectedPlatform === platform.name ? null : platform.name)}
+                className={`w-12 h-12 rounded-full ${platform.color} flex items-center justify-center transition-all duration-300 ${
+                  selectedPlatform === platform.name
+                    ? 'ring-2 ring-primary ring-offset-2 ring-offset-[#0a0a0a] scale-110 shadow-[0_0_20px_rgba(0,255,136,0.3)]'
+                    : 'opacity-70 hover:opacity-100 hover:scale-110 hover:shadow-lg'
+                }`}
+                title={platform.name}
+              >
               {IconComponent ? (
                 <IconComponent className="w-6 h-6 text-white" />
               ) : (
@@ -131,16 +131,16 @@ export function Contests() {
           { key: 'live' as const, label: 'Live', count: liveContests.length },
           { key: 'upcoming' as const, label: 'Upcoming', count: upcomingContests.length },
           { key: 'past' as const, label: 'Past', count: pastContests.length },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setStatusFilter(tab.key)}
-            className={`px-4 py-2 font-mono text-sm transition-colors border-b-2 ${
-              statusFilter === tab.key
-                ? 'border-primary text-primary'
-                : 'border-transparent text-gray-400 hover:text-white'
-            }`}
-          >
+          ].map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setStatusFilter(tab.key)}
+              className={`px-4 py-2 font-mono text-sm transition-all duration-300 border-b-2 ${
+                statusFilter === tab.key
+                  ? 'border-primary text-primary scale-105'
+                  : 'border-transparent text-gray-400 hover:text-white hover:scale-105'
+              }`}
+            >
             {tab.label} ({tab.count})
           </button>
         ))}

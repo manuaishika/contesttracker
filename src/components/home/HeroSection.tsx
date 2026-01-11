@@ -31,14 +31,14 @@ export function HeroSection() {
           <div className="flex gap-4 pt-6">
             <Link
               to="/contests"
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-all font-mono font-semibold border-glow-green flex items-center gap-2"
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,136,0.3)] transition-all duration-300 font-mono font-semibold border-glow-green flex items-center gap-2"
             >
               <TrophyIcon className="w-5 h-5" />
               View Contests →
             </Link>
             <Link
               to="/signup"
-              className="px-6 py-3 bg-[#1a1a1a] border border-gray-600 text-white rounded-md hover:border-primary/50 transition-all font-mono"
+              className="px-6 py-3 bg-[#1a1a1a] border border-gray-600 text-white rounded-md hover:border-primary/50 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,136,0.1)] transition-all duration-300 font-mono"
             >
               Get Started Free
             </Link>
@@ -46,8 +46,8 @@ export function HeroSection() {
 
           {/* Feature highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+            <div className="flex items-start gap-3 hover:scale-105 transition-all duration-300 cursor-pointer">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 hover:bg-primary/30 hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] transition-all duration-300">
                 <span className="text-primary font-mono font-bold">6+</span>
               </div>
               <div>
@@ -55,8 +55,8 @@ export function HeroSection() {
                 <p className="text-gray-400 text-sm font-mono">All major CP platforms in one place</p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+            <div className="flex items-start gap-3 hover:scale-105 transition-all duration-300 cursor-pointer">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 hover:bg-primary/30 hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] transition-all duration-300">
                 <ChartIcon className="w-5 h-5 text-primary" />
               </div>
               <div>
@@ -64,8 +64,8 @@ export function HeroSection() {
                 <p className="text-gray-400 text-sm font-mono">Monitor your progress across platforms</p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+            <div className="flex items-start gap-3 hover:scale-105 transition-all duration-300 cursor-pointer">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 hover:bg-primary/30 hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] transition-all duration-300">
                 <BellIcon className="w-5 h-5 text-primary" />
               </div>
               <div>

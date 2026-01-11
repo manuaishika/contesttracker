@@ -1,111 +1,81 @@
 # 🏆 CP Hub - Competitive Programming Contest Tracker
 
-A dark, hacker-themed dashboard that aggregates competitive programming contests from all major platforms (Codeforces, LeetCode, CodeChef, AtCoder, HackerRank, TopCoder) and displays your ratings in one unified view.
+A dark, hacker-themed dashboard that aggregates competitive programming contests from all major platforms and displays your ratings in one unified view.
 
-## Features
+## Quick Start
 
-- 🔐 **Authentication**: Email/password and Google OAuth login
-- 📊 **Contest Tracking**: View all contests from major CP platforms
-- 🎯 **Filter & Search**: Filter by platform, status, and search contests
-- 📈 **Dashboard**: Track your ratings across platforms
-- 🔔 **Reminders**: Set reminders for upcoming contests
-- 🌙 **Dark Terminal Theme**: Beautiful hacker-inspired UI
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm or bun
-- Supabase account (free tier works)
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/manuaishika/contesttracker.git
-cd contesttracker
-```
-
-2. Install dependencies:
 ```bash
 npm install
-```
-
-3. Set up Supabase:
-   - Go to [supabase.com](https://supabase.com) and create a free account
-   - Create a new project
-   - Go to Settings → API and copy your Project URL and anon/public key
-
-4. Create `.env` file in the root directory:
-```env
-VITE_SUPABASE_URL=your-project-url-here
-VITE_SUPABASE_ANON_KEY=your-anon-key-here
-```
-
-5. Enable Google OAuth in Supabase:
-   - Go to Authentication → Providers in your Supabase dashboard
-   - Enable Google provider
-   - Add your Google OAuth credentials (Client ID and Secret)
-   - Add `http://localhost:5173` to authorized redirect URLs
-
-### Development
-
-```bash
+# Create .env file with your Supabase keys (see below)
 npm run dev
 ```
 
-The app will be available at `http://localhost:5173`
+## Setup
 
-### Build
+1. **Create `.env` file**:
+   ```env
+   VITE_SUPABASE_URL=https://your-project.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-anon-key-here
+   ```
 
-```bash
-npm run build
-```
+2. **Run `DATABASE_SETUP.sql`** in Supabase SQL Editor to create all tables
 
-### Preview
+3. **Set yourself as admin** (after creating your account):
+   ```sql
+   UPDATE profiles SET is_admin = true WHERE id = 'your-user-id-here';
+   ```
 
-```bash
-npm run preview
+4. **Enable OAuth** (optional): Google, GitHub in Supabase Authentication → Providers
+
+## Features
+
+- 📊 **Contest Tracking**: 6 platforms (Codeforces, LeetCode, AtCoder, CodeChef, HackerRank, TopCoder)
+- 🔐 **Authentication**: Email/Password, Google, GitHub OAuth
+- 📈 **Dashboard**: Personal dashboard with reminders (preview for guests)
+- 🔔 **Reminders**: Set reminders for contests (requires login)
+- ❤️ **Favorites**: Bookmark favorite contests (requires login)
+- 👑 **Admin Dashboard**: View user stats, platform distribution (`/admin` - admin only)
+
+## Current Status
+
+### ✅ Working
+- Contest fetching from Codeforces API + mock data for all platforms
+- Authentication (Email/Password, Google, GitHub)
+- Reminders and favorites saving to Supabase (requires login)
+- Admin dashboard (shows user stats, platform distribution)
+- Dark terminal-themed UI with responsive design
+
+### 🔧 Needs Setup
+- Run `DATABASE_SETUP.sql` in Supabase (creates tables)
+- Set yourself as admin (see SQL above)
+- Test API endpoints for AtCoder/CodeChef
+
+### ⚠️ Not Yet Implemented
+- Platform linking functionality (UI exists, needs implementation)
+- Real rating fetching from platform APIs
+- Rating history tracking
+- Profile editing page
+- Calendar export for reminders
+- Email notifications
+
+## Admin Dashboard
+
+Visit `/admin` (admin only) to see:
+- Total users count
+- Active users (last 30 days)
+- Total reminders and favorites
+- Platform distribution
+- Recent users list
+
+**How to become admin**: After creating your account, run this SQL in Supabase:
+```sql
+UPDATE profiles SET is_admin = true WHERE id = 'your-user-id-here';
 ```
 
 ## Tech Stack
 
-- **Frontend**: React 18, TypeScript, Vite
-- **Styling**: Tailwind CSS with custom dark theme
-- **Routing**: React Router v6
-- **Authentication**: Supabase (Email/Password + Google OAuth)
-- **UI Components**: Custom shadcn/ui-inspired components
-- **Fonts**: JetBrains Mono (terminal aesthetic)
+React 18 + TypeScript + Vite + Tailwind CSS + Supabase
 
-## Project Structure
+---
 
-```
-src/
-├── components/       # React components
-│   ├── contests/    # Contest-related components
-│   ├── dashboard/   # Dashboard components
-│   ├── home/        # Homepage components
-│   ├── layout/      # Layout components (Navbar, etc.)
-│   └── ui/          # Reusable UI components
-├── contexts/        # React contexts (Auth, etc.)
-├── hooks/           # Custom React hooks
-├── lib/             # Utilities and configurations
-├── pages/           # Page components
-└── App.tsx          # Main app component
-```
-
-## Authentication
-
-The app supports:
-- **Email/Password**: Traditional sign up and login
-- **Google OAuth**: One-click Google authentication
-- **Codeforces Linking**: Link your Codeforces account (manual handle entry)
-
-## Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
-
-## License
-
-MIT License - feel free to use this project for your own purposes.
+**Status**: Core functionality works. Needs database setup for full functionality.

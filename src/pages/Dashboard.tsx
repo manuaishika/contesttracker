@@ -70,24 +70,24 @@ export function Dashboard() {
 
           {/* Features Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6">
+            <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,136,0.1)] transition-all duration-300 cursor-pointer">
               <h3 className="text-primary font-mono font-semibold mb-2">Statistics Overview</h3>
               <div className="text-3xl font-bold font-mono text-primary mb-1">150</div>
               <p className="text-gray-400 font-mono text-sm">Total Contests</p>
             </div>
-            <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6">
+            <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,136,0.1)] transition-all duration-300 cursor-pointer">
               <h3 className="text-primary font-mono font-semibold mb-2">Platform Ratings</h3>
               <div className="text-3xl font-bold font-mono text-primary mb-1">6+</div>
               <p className="text-gray-400 font-mono text-sm">Linked Platforms</p>
             </div>
-            <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6">
+            <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,136,0.1)] transition-all duration-300 cursor-pointer">
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-2 border border-primary/30">
                 <ChartIcon className="w-6 h-6 text-primary" />
               </div>
               <h3 className="text-primary font-mono font-semibold mb-2">Rating History</h3>
               <p className="text-gray-400 font-mono text-sm">Track Progress</p>
             </div>
-            <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6">
+            <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 hover:border-primary/50 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,136,0.1)] transition-all duration-300 cursor-pointer">
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-2 border border-primary/30">
                 <BellIcon className="w-6 h-6 text-primary" />
               </div>
@@ -103,7 +103,7 @@ export function Dashboard() {
               {linkedPlatforms.slice(0, 3).map((platform) => (
                 <div
                   key={platform.platform}
-                  className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 opacity-60"
+                  className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-6 opacity-60 hover:opacity-80 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,136,0.1)] transition-all duration-300"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
