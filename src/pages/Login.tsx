@@ -136,9 +136,10 @@ export function Login() {
               type="button"
               onClick={handleCodeforcesSignIn}
               className="w-full flex items-center justify-center gap-2.5 py-2.5 px-4 bg-[#0a0a0a] border border-blue-600/50 text-white rounded-md hover:border-blue-500 hover:scale-[1.02] transition-all font-mono text-sm"
+              title="Codeforces doesn't support OAuth. Link your handle in Dashboard after login."
             >
               <div className="w-5 h-5 rounded-full bg-blue-500"></div>
-              Link Codeforces Handle
+              Link Codeforces (Manual)
             </button>
           </div>
 

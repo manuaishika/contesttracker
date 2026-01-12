@@ -67,12 +67,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/dashboard`,
-      },
-    })
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/dashboard`,
+        },
+      })
+
+      if (error) {
+        console.error('Google OAuth error:', error)
+        alert('Google sign-in failed. Please make sure Google OAuth is enabled in your Supabase project:\n\n1. Go to Supabase Dashboard → Authentication → Providers\n2. Enable Google provider\n3. Add your Google OAuth credentials\n4. Add redirect URL: ' + window.location.origin + '/dashboard')
+        throw error
+      }
+    } catch (error) {
+      console.error('Error signing in with Google:', error)
+      throw error
+    }
   }
 
   const signInWithGitHub = async () => {
@@ -85,12 +96,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signInWithCodeforces = async () => {
-    // Codeforces doesn't have OAuth, so we'll redirect to Codeforces auth
-    // Users can link their Codeforces account manually
-    const codeforcesAuthUrl = 'https://codeforces.com/enter'
-    window.open(codeforcesAuthUrl, '_blank')
-    // For now, we'll use a workaround where users can add their Codeforces handle
-    // This would typically be done in the dashboard
+    // Codeforces doesn't have OAuth - redirect to dashboard where they can link their handle
+    if (window.location.pathname !== '/dashboard') {
+      window.location.href = '/dashboard'
+    }
+    alert('Codeforces doesn\'t support OAuth login.\n\nTo link your Codeforces account:\n1. Go to Dashboard\n2. Click "Link Platform" button\n3. Enter your Codeforces handle\n\nThis will allow us to fetch your ratings and contest history.')
   }
 
   return (

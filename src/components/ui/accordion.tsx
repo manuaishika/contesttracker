@@ -32,13 +32,11 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
 
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
   ({ className, value, ...props }, ref) => {
-    const context = React.useContext(AccordionContext)
-    const isOpen = context.value === value
-
     return (
       <div
         ref={ref}
         className={cn("border-b", className)}
+        data-value={value}
         {...props}
       />
     )

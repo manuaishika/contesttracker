@@ -2,11 +2,13 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Input } from "./input"
 
-export interface InputOTPProps extends React.HTMLAttributes<HTMLDivElement> {
+interface InputOTPPropsBase extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   length?: number
   value?: string
   onChange?: (value: string) => void
 }
+
+export type InputOTPProps = InputOTPPropsBase
 
 const InputOTP = React.forwardRef<HTMLDivElement, InputOTPProps>(
   ({ className, length = 6, value = "", onChange, ...props }, ref) => {

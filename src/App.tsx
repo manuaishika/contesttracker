@@ -5,6 +5,7 @@ import { Index } from '@/pages/Index'
 import { Contests } from '@/pages/Contests'
 import { Dashboard } from '@/pages/Dashboard'
 import { Admin } from '@/pages/Admin'
+import { Settings } from '@/pages/Settings'
 import { Login } from '@/pages/Login'
 import { Signup } from '@/pages/Signup'
 import { NotFound } from '@/pages/NotFound'
@@ -19,6 +20,7 @@ function App() {
           <Route path="contests" element={<Contests />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+          <Route path="settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="*" element={<NotFound />} />

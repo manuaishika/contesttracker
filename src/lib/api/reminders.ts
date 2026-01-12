@@ -1,8 +1,15 @@
 import { supabase } from '../supabase'
 import { Contest } from '../types'
 
-export async function addReminder(userId: string, contest: Contest) {
+export async function addReminder(userId: string, contest: Contest, notificationMethod: string = 'app', reminderTimeBefore: number = 60) {
   try {
+    // Get user's default notification preferences
+    const { data: prefs } = await supabase
+      .from('user_notification_preferences')
+      .select('*')
+      .eq('user_id', userId)
+      .single()
+
     const { data, error } = await supabase
       .from('contest_reminders')
       .insert({
@@ -12,6 +19,8 @@ export async function addReminder(userId: string, contest: Contest) {
         platform: contest.platform,
         start_time: contest.startTime,
         url: contest.url,
+        notification_method: notificationMethod || (prefs?.app_notifications && prefs?.email_notifications ? 'both' : prefs?.app_notifications ? 'app' : 'email'),
+        reminder_time_before: reminderTimeBefore || prefs?.default_reminder_time || 60,
       })
       .select()
       .single()

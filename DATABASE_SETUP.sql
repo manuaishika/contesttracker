@@ -33,8 +33,23 @@ CREATE TABLE IF NOT EXISTS contest_reminders (
   start_time TIMESTAMPTZ NOT NULL,
   url TEXT,
   notified BOOLEAN DEFAULT FALSE,
+  notification_method TEXT DEFAULT 'app', -- 'app', 'email', 'both', 'sms', 'push'
+  reminder_time_before INTEGER DEFAULT 60, -- minutes before contest
   created_at TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(user_id, contest_id)
+);
+
+-- Create user_notification_preferences table
+CREATE TABLE IF NOT EXISTS user_notification_preferences (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL UNIQUE,
+  email_notifications BOOLEAN DEFAULT true,
+  app_notifications BOOLEAN DEFAULT true,
+  push_notifications BOOLEAN DEFAULT false,
+  sms_notifications BOOLEAN DEFAULT false,
+  default_reminder_time INTEGER DEFAULT 60, -- minutes before contest
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- Create contest_favorites table
@@ -153,6 +168,37 @@ CREATE POLICY "Users can insert their own statistics"
 
 CREATE POLICY "Users can update their own statistics"
   ON user_statistics FOR UPDATE
+  USING (auth.uid() = user_id);
+
+-- Create policies for user_notification_preferences
+ALTER TABLE user_notification_preferences ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view their own notification preferences"
+  ON user_notification_preferences FOR SELECT
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert their own notification preferences"
+  ON user_notification_preferences FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update their own notification preferences"
+  ON user_notification_preferences FOR UPDATE
+  USING (auth.uid() = user_id);
+
+-- Enable RLS for user_settings
+ALTER TABLE user_settings ENABLE ROW LEVEL SECURITY;
+
+-- Create policies for user_settings
+CREATE POLICY "Users can view their own settings"
+  ON user_settings FOR SELECT
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert their own settings"
+  ON user_settings FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update their own settings"
+  ON user_settings FOR UPDATE
   USING (auth.uid() = user_id);
 
 -- Create function to automatically create profile on signup

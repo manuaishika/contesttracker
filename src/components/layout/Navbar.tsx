@@ -68,6 +68,20 @@ export function Navbar() {
               <ChartIcon className="w-4 h-4" />
               Dashboard
             </Link>
+            {user && (
+              <Link
+                to="/settings"
+                className={cn(
+                  "flex items-center gap-2 px-3 py-2 rounded-md transition-colors font-mono text-sm",
+                  location.pathname === '/settings'
+                    ? "text-primary bg-primary/10 border-glow-green"
+                    : "text-gray-400 hover:text-white"
+                )}
+                style={{ pointerEvents: 'auto', zIndex: 10007, position: 'relative', cursor: 'pointer' }}
+              >
+                Settings
+              </Link>
+            )}
             {isAdmin && (
               <Link
                 to="/admin"
@@ -84,6 +98,18 @@ export function Navbar() {
             )}
             {user ? (
               <>
+                <Link
+                  to="/settings"
+                  className={cn(
+                    "flex items-center gap-2 px-3 py-2 rounded-md transition-colors font-mono text-sm",
+                    location.pathname === '/settings'
+                      ? "text-primary bg-primary/10 border-glow-green"
+                      : "text-gray-400 hover:text-white"
+                  )}
+                  style={{ pointerEvents: 'auto', zIndex: 10007, position: 'relative', cursor: 'pointer' }}
+                >
+                  Settings
+                </Link>
                 <span className="text-gray-400 font-mono text-sm" style={{ pointerEvents: 'auto' }}>
                   {user.email}
                 </span>

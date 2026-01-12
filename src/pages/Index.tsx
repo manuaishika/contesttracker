@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { HeroSection } from '@/components/home/HeroSection'
 import { PlatformShowcase } from '@/components/home/PlatformShowcase'
 import { UpcomingContestsPreview } from '@/components/home/UpcomingContestsPreview'

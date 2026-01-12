@@ -1,5 +1,7 @@
 import * as React from "react"
-import { Toggle, ToggleProps } from "./toggle"
+import type { ToggleProps } from "./toggle"
+
+// ToggleProps is used for type checking in React.isValidElement
 
 export interface ToggleGroupProps {
   value?: string[]
@@ -7,7 +9,7 @@ export interface ToggleGroupProps {
   children: React.ReactNode
 }
 
-export function ToggleGroup({ value = [], onValueChange, children }: ToggleGroupProps) {
+function ToggleGroup({ value = [], onValueChange, children }: ToggleGroupProps) {
   return (
     <div className="flex gap-2">
       {React.Children.map(children, (child) => {

@@ -27,18 +27,26 @@ export async function getAdminStats(userId: string): Promise<AdminStats | null> 
       return null
     }
 
-    // Get total users count
-    const { count: totalUsers } = await supabase
+    // Get total users count (from auth.users via profiles)
+    const { count: totalUsers, error: usersError } = await supabase
       .from('profiles')
       .select('*', { count: 'exact', head: true })
 
-    // Get active users (logged in within last 30 days)
+    if (usersError) {
+      console.error('Error fetching total users:', usersError)
+    }
+
+    // Get active users (updated within last 30 days)
     const thirtyDaysAgo = new Date()
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
-    const { count: activeUsers } = await supabase
+    const { count: activeUsers, error: activeError } = await supabase
       .from('profiles')
       .select('*', { count: 'exact', head: true })
       .gte('updated_at', thirtyDaysAgo.toISOString())
+
+    if (activeError) {
+      console.error('Error fetching active users:', activeError)
+    }
 
     // Get total reminders
     const { count: totalReminders } = await supabase
